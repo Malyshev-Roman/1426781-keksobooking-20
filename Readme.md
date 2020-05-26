@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Роман Малышев](https://up.htmlacademy.ru/javascript/20/user/1426781).
-* Наставник: [Алексей Беляев](https://htmlacademy.ru/profile/id691043).
+* Наставник: `Алексей Беляев`.
 
 ---
 
