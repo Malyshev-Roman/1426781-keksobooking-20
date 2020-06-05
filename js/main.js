@@ -1,6 +1,6 @@
 'use strict';
 
-var KEKSOBOOKING_FEATURES = [
+var FEATURES = [
   'wifi',
   'dishwasher',
   'parking',
@@ -8,23 +8,23 @@ var KEKSOBOOKING_FEATURES = [
   'elevator',
   'conditioner'
 ];
-var KEKSOBOOKING_PHOTOS = [
+var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
-var KEKSOBOOKING_TYPES = [
+var TYPES = [
   'palace',
   'flat',
   'house',
   'bungalo'
 ];
-var KEKSOBOOKING_TIMES = [
+var TIMES = [
   '12:00',
   '13:00',
   '14:00'
 ];
-var KEKSOBOOKING_TITLES = [
+var TITLES = [
   'Большая квартира',
   'Маленькая квартира',
   'Шикарный дворец',
@@ -48,14 +48,13 @@ var mapWidth = mapAdvert.offsetWidth;
 var mapPinElement = document.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-var getRandomLocations = function (min, max) {
+var getRandom = function (min, max) {
   return Math.floor(min + Math.random() * (max - min + 1));
-  // return Math.floor(Math.random() * (max - min) + min);
 };
 
 var arrayElement = function (arr) {
   var rand = arr.slice();
-  return rand.splice(rand.indexOf(rand[getRandomLocations(0, rand.length - 1)]), 1);
+  return rand.splice(rand.indexOf(rand[getRandom(0, rand.length - 1)]), 1);
 };
 
 var photosArray = function (arr) {
@@ -67,28 +66,28 @@ var photosArray = function (arr) {
   }
   return arr;
 };
-var createAdvertsPinsList = function () {
+var createAdverts = function () {
   var pins = [];
 
   for (var i = 0; i < PINS_COUNTS; i++) {
-    var pinCoordX = getRandomLocations(PIN_WIDTH, mapWidth - PIN_WIDTH);
-    var pinCoordY = getRandomLocations(PIN_MIN_Y, PIN_MAX_Y);
+    var pinCoordX = getRandom(PIN_WIDTH, mapWidth - PIN_WIDTH);
+    var pinCoordY = getRandom(PIN_MIN_Y, PIN_MAX_Y);
     var pin = {
       author: {
         avatar: 'img/avatars/user0' + (i + 1) + '.png'
       },
       offer: {
-        title: arrayElement(KEKSOBOOKING_TITLES),
+        title: arrayElement(TITLES),
         address: pinCoordX + ', ' + pinCoordY,
-        price: getRandomLocations(1000, 1000000),
-        type: KEKSOBOOKING_TYPES[getRandomLocations(0, KEKSOBOOKING_TYPES.length - 1)],
-        rooms: getRandomLocations(1, 5),
-        guests: getRandomLocations(1, 5),
-        checkin: KEKSOBOOKING_TIMES[getRandomLocations(0, KEKSOBOOKING_TIMES.length - 1)],
-        checkout: KEKSOBOOKING_TIMES[getRandomLocations(0, KEKSOBOOKING_TIMES.length - 1)],
-        features: arrayElement(KEKSOBOOKING_FEATURES),
+        price: getRandom(1000, 1000000),
+        type: TYPES[getRandom(0, TYPES.length - 1)],
+        rooms: getRandom(1, 5),
+        guests: getRandom(1, 5),
+        checkin: TIMES[getRandom(0, TIMES.length - 1)],
+        checkout: TIMES[getRandom(0, TIMES.length - 1)],
+        features: arrayElement(FEATURES),
         description: '',
-        photos: photosArray(KEKSOBOOKING_PHOTOS)
+        photos: photosArray(PHOTOS)
       },
       location: {
         x: pinCoordX,
@@ -118,4 +117,4 @@ var createFragment = function (pins) {
   }
   mapPinElement.appendChild(fragment);
 };
-createFragment(createAdvertsPinsList());
+createFragment(createAdverts());
