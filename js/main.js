@@ -125,9 +125,12 @@ var createAdverts = function (i) {
   return pins;
 };
 
-for (var k = 0; k < PINS_COUNTS; k++) {
-  advertArr[k] = createAdverts(k);
-}
+var createAdvertArr = function (counts) {
+  for (var k = 0; k < counts; k++) {
+    advertArr[k] = createAdverts(k);
+  }
+  return advertArr;
+};
 
 var renderPinMap = function (pin) {
   var mapElement = pinTemplate.cloneNode(true);
@@ -147,7 +150,7 @@ var createFragment = function (pins) {
   }
   mapPinElement.appendChild(fragment);
 };
-createFragment(advertArr);
+createFragment(createAdvertArr(PINS_COUNTS));
 
 var createFeatureFragment = function (feature) {
   var featureFragment = document.createDocumentFragment();
