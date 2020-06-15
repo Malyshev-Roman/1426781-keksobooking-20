@@ -55,6 +55,7 @@ var PIN_HEIGHT = 44;
 var PIN_MAX_Y = 630 - PIN_HEIGHT;
 var PIN_MIN_Y = 130;
 var PINS_COUNTS = 8;
+var PIN_ARROW_HEIGHT = 70 - PIN_WIDTH;
 
 var mapAdvert = document.querySelector('.map');
 
@@ -230,7 +231,7 @@ var createCard = function (cards) {
 var getMapPinMainCoords = function () {
   var mapPinMainPosition = {
     x: mapPinMain.offsetLeft + Math.floor(mapPinMain.offsetWidth / 2),
-    y: mapPinMain.offsetTop + mapPinMain.offsetHeight
+    y: mapPinMain.offsetTop + mapPinMain.offsetHeight + PIN_HEIGHT - PIN_ARROW_HEIGHT
   };
   return mapPinMainPosition;
 };
@@ -247,6 +248,7 @@ var activationForm = function () {
     adFormFieldsets[i].disabled = false;
   }
   adFormHeader.disabled = false;
+  checkСapacity();
   fillAddress();
 };
 
