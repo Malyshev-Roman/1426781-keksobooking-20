@@ -382,3 +382,5 @@ adForm.addEventListener('submit', function (evt) {
   showSuccess();
   deactivationForm();
 });
+
+// move
