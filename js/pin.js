@@ -57,38 +57,27 @@
   var PIN_MAX_Y = 630 - window.PIN_HEIGHT;
   var PIN_MIN_Y = 130;
 
-  var photosArray = function (arr) {
-    var copyArr = arr.slice(0);
-    for (var i = arr.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = copyArr[i];
-      copyArr[i] = copyArr[j];
-      copyArr[j] = temp;
-    }
-    return copyArr;
-  };
-
   window.pin = {
 
     createAdverts: function (i) {
-      var pinCoordX = window.data.getRandom(window.PIN_WIDTH, window.mapWidth - window.PIN_WIDTH);
-      var pinCoordY = window.data.getRandom(PIN_MIN_Y, PIN_MAX_Y);
+      var pinCoordX = window.util.getRandom(window.PIN_WIDTH, window.mapWidth - window.PIN_WIDTH);
+      var pinCoordY = window.util.getRandom(PIN_MIN_Y, PIN_MAX_Y);
       var pins = {
         author: {
           avatar: 'img/avatars/user0' + (i + 1) + '.png'
         },
         offer: {
-          title: window.data.arrayElement(TITLES),
+          title: window.util.getElementArray(TITLES),
           address: pinCoordX + ', ' + pinCoordY,
-          price: window.data.getRandom(PRICES.MIN, PRICES.MAX),
-          type: TYPES[window.data.getRandom(0, TYPES.length - 1)],
-          rooms: window.data.getRandom(ROOMS.MIN, ROOMS.MAX),
-          guests: window.data.getRandom(GUESTS.MIN, GUESTS.MAX),
-          checkin: TIMES[window.data.getRandom(0, TIMES.length - 1)],
-          checkout: TIMES[window.data.getRandom(0, TIMES.length - 1)],
-          features: window.data.arrayElement(FEATURES),
+          price: window.util.getRandom(PRICES.MIN, PRICES.MAX),
+          type: TYPES[window.util.getRandom(0, TYPES.length - 1)],
+          rooms: window.util.getRandom(ROOMS.MIN, ROOMS.MAX),
+          guests: window.util.getRandom(GUESTS.MIN, GUESTS.MAX),
+          checkin: TIMES[window.util.getRandom(0, TIMES.length - 1)],
+          checkout: TIMES[window.util.getRandom(0, TIMES.length - 1)],
+          features: window.util.getElementArray(FEATURES),
           description: '',
-          photos: photosArray(PHOTOS)
+          photos: window.data.getPhotosArray(PHOTOS)
         },
         location: {
           x: pinCoordX,
