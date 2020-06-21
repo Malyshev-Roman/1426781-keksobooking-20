@@ -2,17 +2,10 @@
 
 (function () {
 
-  var ESC_KEY = 'Escape';
-  var ENTER_KEY = 'Enter';
-  var PIN_ARROW_HEIGHT = 70;
-  var PINS_COUNTS = 8;
-  var PIN_ARROW_WIDTH = 84 - PIN_ARROW_HEIGHT;
-  var mapAdvert = document.querySelector('.map');
   var mapPinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
   var adFormHeader = adForm.querySelector('.ad-form-header');
-  var addressInput = adForm.querySelector('#address');
   var success = document.querySelector('.success');
   var typeInput = document.querySelector('#type');
   var priceInput = document.querySelector('#price');
@@ -22,49 +15,31 @@
   var capacitySelect = document.querySelector('#capacity');
   var submitBtn = document.querySelector('.ad-form__submit');
   var isActivate = false;
-
+  var PINS_COUNTS = 8;
   adFormHeader.disabled = true;
 
   for (var l = 0; l < adFormFieldsets.length; l++) {
     adFormFieldsets[l].disabled = true;
   }
 
-  var getMapPinMainCoords = function () {
-    var mapPinMainPosition = {
-      x: mapPinMain.offsetLeft + Math.floor(mapPinMain.offsetWidth / 2),
-      y: mapPinMain.offsetTop + mapPinMain.offsetHeight + PIN_ARROW_WIDTH
-    };
-    return mapPinMainPosition;
-  };
-
-  var fillAddress = function () {
-    var addressInputCoords = getMapPinMainCoords();
-    addressInput.value = addressInputCoords.x + ', ' + addressInputCoords.y;
-  };
-
   var activationForm = function () {
+    var mapAdvert = document.querySelector('.map');
     mapAdvert.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     for (var i = 0; i < adFormFieldsets.length; i++) {
       adFormFieldsets[i].disabled = false;
     }
     adFormHeader.disabled = false;
-    fillAddress();
+    window.map.fillAddress();
   };
-
-  mapPinMain.addEventListener('keydown', function (evt) {
-    if (evt.key === ENTER_KEY) {
-      activationForm();
-      window.map.createFragment(window.util.createAdvertArr(PINS_COUNTS));
-    }
-  });
 
   var formActivate = function (evt) {
     if (!isActivate && evt.button === 0) {
       activationForm();
-      window.map.createFragment(window.util.createAdvertArr(PINS_COUNTS));
+      window.map.createFragment(window.data.createAdvertArr(PINS_COUNTS));
     }
-    fillAddress();
+    mapPinMain.removeEventListener('mousedown', formActivate);
+    window.map.fillAddress();
   };
 
   mapPinMain.addEventListener('mousedown', formActivate);
@@ -79,16 +54,9 @@
     for (var j = 0; j < mapPinsItems.length; j++) {
       mapPinsItems[j].remove();
     }
-    if (window.mapCard) {
-      window.mapCard.remove();
-    }
-    mapPinMain.top = '375px';
-    mapPinMain.left = '570px';
-    addressInput.value = (mapPinMain.offsetTop - mapPinMain.offsetHeight / 2) + ', ' + (mapPinMain.offsetLeft - mapPinMain.offsetWidth / 2);
-    mapAdvert.classList.add('map--faded');
+    window.map.mapDeactivate();
     adForm.classList.add('ad-form--disabled');
   };
-
 
   typeInput.addEventListener('change', function (evt) {
     switch (evt.target.value) {
@@ -170,7 +138,7 @@
   var showSuccess = function () {
     success.classList.remove('hidden');
     success.addEventListener('keydown', function (evt) {
-      if (evt.key === ESC_KEY) {
+      if (evt.key === window.ESC_KEY) {
         success.classList.add('hidden');
       }
     });
@@ -183,4 +151,7 @@
     deactivationForm();
   });
 
+  window.form = {
+    activationForm: activationForm
+  };
 }());

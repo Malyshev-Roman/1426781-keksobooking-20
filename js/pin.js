@@ -71,22 +71,22 @@
   window.pin = {
 
     createAdverts: function (i) {
-      var pinCoordX = window.util.getRandom(window.PIN_WIDTH, window.mapWidth - window.PIN_WIDTH);
-      var pinCoordY = window.util.getRandom(PIN_MIN_Y, PIN_MAX_Y);
+      var pinCoordX = window.data.getRandom(window.PIN_WIDTH, window.mapWidth - window.PIN_WIDTH);
+      var pinCoordY = window.data.getRandom(PIN_MIN_Y, PIN_MAX_Y);
       var pins = {
         author: {
           avatar: 'img/avatars/user0' + (i + 1) + '.png'
         },
         offer: {
-          title: window.util.arrayElement(TITLES),
+          title: window.data.arrayElement(TITLES),
           address: pinCoordX + ', ' + pinCoordY,
-          price: window.util.getRandom(PRICES.MIN, PRICES.MAX),
-          type: TYPES[window.util.getRandom(0, TYPES.length - 1)],
-          rooms: window.util.getRandom(ROOMS.MIN, ROOMS.MAX),
-          guests: window.util.getRandom(GUESTS.MIN, GUESTS.MAX),
-          checkin: TIMES[window.util.getRandom(0, TIMES.length - 1)],
-          checkout: TIMES[window.util.getRandom(0, TIMES.length - 1)],
-          features: window.util.arrayElement(FEATURES),
+          price: window.data.getRandom(PRICES.MIN, PRICES.MAX),
+          type: TYPES[window.data.getRandom(0, TYPES.length - 1)],
+          rooms: window.data.getRandom(ROOMS.MIN, ROOMS.MAX),
+          guests: window.data.getRandom(GUESTS.MIN, GUESTS.MAX),
+          checkin: TIMES[window.data.getRandom(0, TIMES.length - 1)],
+          checkout: TIMES[window.data.getRandom(0, TIMES.length - 1)],
+          features: window.data.arrayElement(FEATURES),
           description: '',
           photos: photosArray(PHOTOS)
         },
