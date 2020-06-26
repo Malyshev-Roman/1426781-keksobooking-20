@@ -15,7 +15,6 @@
   var capacitySelect = document.querySelector('#capacity');
   var submitBtn = document.querySelector('.ad-form__submit');
   var isActivate = false;
-  var PINS_COUNTS = 8;
   adFormHeader.disabled = true;
 
   for (var l = 0; l < adFormFieldsets.length; l++) {
@@ -36,7 +35,7 @@
   var formActivate = function (evt) {
     if (!isActivate && evt.button === 0) {
       activationForm();
-      window.map.createFragment(window.data.createAdvertArr(PINS_COUNTS));
+      window.backend.load(window.map.createFragment, window.data.errorHandler);
     }
     mapPinMain.removeEventListener('mousedown', formActivate);
     window.map.fillAddress();
