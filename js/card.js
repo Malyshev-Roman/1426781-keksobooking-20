@@ -57,5 +57,12 @@
       });
       return card;
     },
+
+    removeCard: function () {
+      var mapCard = document.querySelector('.map__card');
+      if (mapCard) {
+        mapCard.remove();
+      }
+    }
   };
 }());

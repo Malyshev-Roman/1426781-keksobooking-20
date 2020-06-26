@@ -16,8 +16,8 @@
     var mapElement = pinTemplate.cloneNode(true);
     var mapImg = mapElement.querySelector('img');
 
-    mapElement.style.left = pin.location.x + 'px';
-    mapElement.style.top = pin.location.y + 'px';
+    mapElement.style.left = pin.location.x + (window.PIN_WIDTH / 2) + 'px';
+    mapElement.style.top = pin.location.y + PIN_ARROW_HEIGHT + 'px';
     mapImg.src = pin.author.avatar;
     mapImg.alt = pin.offer.title;
     mapElement .addEventListener('click', function () {
