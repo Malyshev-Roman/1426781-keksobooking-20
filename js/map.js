@@ -2,7 +2,9 @@
 
 (function () {
 
+  var PIN_MAP_WIDTH = 50;
   var PIN_ARROW_HEIGHT = 70;
+  var PIN_MAP_HEIGHT = 65;
   var PIN_ARROW_WIDTH = 84 - PIN_ARROW_HEIGHT;
   var mapAdvert = document.querySelector('.map');
   window.mapWidth = mapAdvert.offsetWidth;
@@ -16,8 +18,8 @@
     var mapElement = pinTemplate.cloneNode(true);
     var mapImg = mapElement.querySelector('img');
 
-    mapElement.style.left = pin.location.x + (window.PIN_WIDTH / 2) + 'px';
-    mapElement.style.top = pin.location.y + PIN_ARROW_HEIGHT + 'px';
+    mapElement.style.left = pin.location.x - (PIN_MAP_WIDTH / 2) + 'px';
+    mapElement.style.top = pin.location.y - PIN_MAP_HEIGHT + 'px';
     mapImg.src = pin.author.avatar;
     mapImg.alt = pin.offer.title;
     mapElement .addEventListener('click', function () {

@@ -41,7 +41,6 @@
       activationForm();
       window.backend.load(window.map.createFragment, window.data.errorHandler);
     }
-    mapPinMain.removeEventListener('mousedown', formActivate);
     window.map.fillAddress();
   };
 
@@ -57,8 +56,8 @@
     for (var j = 0; j < mapPinsItems.length; j++) {
       mapPinsItems[j].remove();
     }
-    window.map.mapDeactivate();
     window.card.removeCard();
+    window.map.mapDeactivate();
     adForm.classList.add('ad-form--disabled');
   };
 
@@ -175,9 +174,9 @@
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    deactivationForm();
     var formData = new FormData(adForm);
     window.backend.save(formData, showSuccessMessage, onSubmitError);
+    deactivationForm();
   });
 
   window.form = {
