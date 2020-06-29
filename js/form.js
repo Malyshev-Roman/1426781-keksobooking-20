@@ -36,12 +36,20 @@
     window.map.fillAddress();
   };
 
+  var successHandler = function (ads) {
+    window.ads = ads.map(function (ad, index) {
+      return Object.assign({}, ad, {id: index});
+    });
+    window.map.createFragment(window.ads);
+  };
+
   var formActivate = function (evt) {
     if (!isActivate && evt.button === 0) {
       activationForm();
-      window.backend.load(window.map.createFragment, window.data.errorHandler);
+      window.backend.load(successHandler, window.data.errorHandler);
     }
     window.map.fillAddress();
+    mapPinMain.removeEventListener('mousedown', formActivate);
   };
 
   mapPinMain.addEventListener('mousedown', formActivate);
@@ -58,6 +66,7 @@
     }
     window.card.removeCard();
     window.map.mapDeactivate();
+    mapPinMain.addEventListener('mousedown', formActivate);
     adForm.classList.add('ad-form--disabled');
   };
 
@@ -104,7 +113,6 @@
     }
     for (var i = 0; i < roomsValues[inputValue].length; i++) {
       capacitySelect.querySelector('option' + '[value="' + roomsValues[inputValue][i] + '"]').disabled = false;
-      capacitySelect.value = roomsValues[inputValue][i];
     }
   };
 

@@ -2,6 +2,7 @@
 
 (function () {
 
+  var DEBOUNCE_INTERVAL = 500;
   window.ESC_KEY = 'Escape';
   window.ENTER_KEY = 'Enter';
 
@@ -21,6 +22,17 @@
       var rand = arr.slice();
       return rand.splice(rand.indexOf(rand[window.util.getRandom(0, rand.length - 1)]), 1);
     },
-
+    debounce: function (fun) {
+      var lastTimeout = null;
+      return function () {
+        var args = arguments;
+        if (lastTimeout) {
+          window.clearTimeout(lastTimeout);
+        }
+        lastTimeout = window.setTimeout(function () {
+          fun.apply(null, args);
+        }, DEBOUNCE_INTERVAL);
+      };
+    }
   };
 }());
