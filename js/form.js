@@ -6,7 +6,6 @@
   var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
   var adFormHeader = adForm.querySelector('.ad-form-header');
-  var success = document.querySelector('.success');
   var typeInput = document.querySelector('#type');
   var priceInput = document.querySelector('#price');
   var timeInInput = document.querySelector('#timein');
@@ -14,6 +13,11 @@
   var roomNumberSelect = document.querySelector('#room_number');
   var capacitySelect = document.querySelector('#capacity');
   var submitBtn = document.querySelector('.ad-form__submit');
+  var errorTemplate = document.querySelector('#error');
+  var errorDiv = errorTemplate.content.querySelector('.error');
+  var successTemplate = document.querySelector('#success');
+  var successDiv = successTemplate.content.querySelector('.success');
+  var main = document.querySelector('main');
   var isActivate = false;
   adFormHeader.disabled = true;
 
@@ -37,7 +41,6 @@
       activationForm();
       window.backend.load(window.map.createFragment, window.data.errorHandler);
     }
-    mapPinMain.removeEventListener('mousedown', formActivate);
     window.map.fillAddress();
   };
 
@@ -53,6 +56,7 @@
     for (var j = 0; j < mapPinsItems.length; j++) {
       mapPinsItems[j].remove();
     }
+    window.card.removeCard();
     window.map.mapDeactivate();
     adForm.classList.add('ad-form--disabled');
   };
@@ -130,23 +134,48 @@
 
   submitBtn.addEventListener('click', checkPlaceValidity);
 
-  var successHidden = function () {
-    success.classList.add('hidden');
-  };
-
-  var showSuccess = function () {
-    success.classList.remove('hidden');
-    success.addEventListener('keydown', function (evt) {
+  var showErrorMessage = function (errMessage) {
+    var errorElement = errorDiv.cloneNode(true);
+    var errorMessage = errorElement.querySelector('.error__message');
+    var errorButton = errorElement.querySelector('.error__button');
+    var closeMsg = function () {
+      errorElement.classList.add('hidden');
+    };
+    errorButton.addEventListener('click', closeMsg);
+    main.addEventListener('mousedown', closeMsg);
+    main.addEventListener('keydown', function (evt) {
       if (evt.key === window.ESC_KEY) {
-        success.classList.add('hidden');
+        closeMsg();
       }
     });
-    document.addEventListener('click', successHidden);
+    errorMessage.textContent = errMessage;
+    main.appendChild(errorElement);
+  };
+  var showSuccessMessage = function () {
+    var successElement = successDiv.cloneNode(true);
+    var successMessage = successElement.querySelector('.success__message');
+    var removeMsg = function () {
+      successElement.classList.add('hidden');
+    };
+    main.addEventListener('mousedown', removeMsg);
+    main.addEventListener('keydown', function (evt) {
+      if (evt.key === window.ESC_KEY) {
+        removeMsg();
+      }
+    });
+    var msg = successMessage.textContent;
+    main.appendChild(successElement);
+    return msg;
+  };
+
+  var onSubmitError = function (errorMessage) {
+    showErrorMessage(errorMessage);
   };
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    showSuccess();
+    var formData = new FormData(adForm);
+    window.backend.save(formData, showSuccessMessage, onSubmitError);
     deactivationForm();
   });
 

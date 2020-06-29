@@ -7,9 +7,9 @@
 
   window.util = {
 
-    onEscDown: function (evt, popup) {
+    onEscDown: function (evt) {
       if (evt.key === window.ESC_KEY) {
-        popup.remove();
+        window.card.removeCard();
       }
     },
 
