@@ -18,17 +18,12 @@
 
     renderPins(window.ads.filter(function (ad) {
 
-      if (housingType === 'any') {
-        return true;
-      }
-
-      return ad.offer.type === housingType;
+      return housingType === 'any' || ad.offer.type === housingType;
 
     }));
 
   };
 
   mapFiltersForm.addEventListener('change', mapFiltersChangeHandler);
-
 
 })();
