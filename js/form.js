@@ -43,6 +43,7 @@
       return Object.assign({}, ad, {id: index});
     });
     window.map.createFragment(window.ads);
+    mapFiltersForm.classList.remove('hidden');
   };
 
   mapFiltersForm.classList.add('hidden');
@@ -53,7 +54,6 @@
       window.backend.load(successHandler, window.data.errorHandler);
     }
     window.map.fillAddress();
-    mapFiltersForm.classList.remove('hidden');
     mapPinMain.removeEventListener('mousedown', formActivate);
   };
 
