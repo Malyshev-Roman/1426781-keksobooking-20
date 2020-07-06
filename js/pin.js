@@ -87,6 +87,11 @@
       return pins;
     },
 
+    removePins: function (pins) {
+      return pins.forEach(function (item) {
+        item.remove();
+      });
+    }
 
   };
 }());
