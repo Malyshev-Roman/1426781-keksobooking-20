@@ -71,6 +71,8 @@
     }
     window.card.removeCard();
     window.map.mapDeactivate();
+    window.avatar.resetMapPreview();
+    window.avatar.resetHousingPreview();
     mapFiltersForm.classList.add('hidden');
     mapPinMain.addEventListener('mousedown', formActivate);
     adForm.classList.add('ad-form--disabled');
