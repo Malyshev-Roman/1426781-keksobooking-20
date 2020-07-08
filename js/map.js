@@ -7,6 +7,8 @@
   var PIN_ARROW_HEIGHT = 70;
   var PIN_MAP_HEIGHT = 69;
   var PIN_ARROW_WIDTH = 84 - PIN_ARROW_HEIGHT;
+  // var DEFAULT_MAIN_PIN_X = 602;
+  // var DEFAULT_MAIN_PIN_Y = 454;
   var mapAdvert = document.querySelector('.map');
   window.mapWidth = mapAdvert.offsetWidth;
   var mapPinMain = document.querySelector('.map__pin--main');
@@ -68,8 +70,8 @@
       if (window.mapCard) {
         window.mapCard.remove();
       }
-      mapPinMain.top = '375px';
-      mapPinMain.left = '570px';
+      mapPinMain.style.top = '375px';
+      mapPinMain.style.left = '570px';
       addressInput.value = (mapPinMain.offsetTop - mapPinMain.offsetHeight / 2) + ', ' + (mapPinMain.offsetLeft - mapPinMain.offsetWidth / 2);
       mapAdvert.classList.add('map--faded');
     },

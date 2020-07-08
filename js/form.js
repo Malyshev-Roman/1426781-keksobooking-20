@@ -15,6 +15,7 @@
   var roomNumberSelect = document.querySelector('#room_number');
   var capacitySelect = document.querySelector('#capacity');
   var submitBtn = document.querySelector('.ad-form__submit');
+  var resetBtn = document.querySelector('.ad-form__reset');
   var errorTemplate = document.querySelector('#error');
   var errorDiv = errorTemplate.content.querySelector('.error');
   var successTemplate = document.querySelector('#success');
@@ -35,7 +36,6 @@
       adFormFieldsets[i].disabled = false;
     }
     adFormHeader.disabled = false;
-    window.map.fillAddress();
   };
 
   var successHandler = function (ads) {
@@ -55,6 +55,7 @@
     }
     window.map.fillAddress();
     mapPinMain.removeEventListener('mousedown', formActivate);
+    resetBtn.resetEventListener('click', resetBtnHandler);
   };
 
   mapPinMain.addEventListener('mousedown', formActivate);
@@ -76,7 +77,15 @@
     mapFiltersForm.classList.add('hidden');
     mapPinMain.addEventListener('mousedown', formActivate);
     adForm.classList.add('ad-form--disabled');
+    window.map.getMapPinMainCoords();
   };
+
+  var resetBtnHandler = function (evt) {
+    evt.preventDefault();
+    deactivationForm();
+    window.loadImage.remove();
+  };
+  resetBtn.addEventListener('click', resetBtnHandler);
 
   typeInput.addEventListener('change', function (evt) {
     switch (evt.target.value) {
