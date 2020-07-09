@@ -112,7 +112,6 @@
         priceInput.min = 10000;
         priceInput.placeholder = '10000';
         break;
-      default: priceInput.placeholder = '1000';
     }
   });
 
