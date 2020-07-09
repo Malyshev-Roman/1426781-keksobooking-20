@@ -79,8 +79,8 @@
   fileMapChooser.addEventListener('change', fileMapChangeHandler);
 
   window.avatar = {
-    resetMapPreview: resetMapPreview,
-    resetHousingPreview: resetHousingPreview
+    resetMap: resetMapPreview,
+    resetHousing: resetHousingPreview
   };
 
 })();

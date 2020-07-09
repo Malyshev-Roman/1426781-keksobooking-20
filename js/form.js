@@ -22,6 +22,13 @@
   var successDiv = successTemplate.content.querySelector('.success');
   var main = document.querySelector('main');
   var isActivate = false;
+  var roomsValues = {
+    1: [1],
+    2: [1, 2],
+    3: [1, 2, 3],
+    100: [0]
+  };
+
   adFormHeader.disabled = true;
 
   for (var l = 0; l < adFormFieldsets.length; l++) {
@@ -42,7 +49,7 @@
     window.ads = ads.map(function (ad, index) {
       return Object.assign({}, ad, {id: index});
     });
-    window.map.createFragment(window.ads);
+    window.map.createPins(window.ads);
     mapFiltersForm.classList.remove('hidden');
   };
 
@@ -51,9 +58,9 @@
   var formActivate = function (evt) {
     if (!isActivate && evt.button === 0) {
       activationForm();
-      window.backend.load(successHandler, window.data.errorHandler);
+      window.backend.load(successHandler, window.data.error);
     }
-    window.map.fillAddress();
+    window.map.address();
     mapPinMain.removeEventListener('mousedown', formActivate);
     resetBtn.resetEventListener('click', resetBtnHandler);
   };
@@ -70,14 +77,14 @@
     for (var j = 0; j < mapPinsItems.length; j++) {
       mapPinsItems[j].remove();
     }
-    window.card.removeCard();
-    window.map.mapDeactivate();
-    window.avatar.resetMapPreview();
-    window.avatar.resetHousingPreview();
+    window.card.remove();
+    window.map.deactivate();
+    window.avatar.resetMap();
+    window.avatar.resetHousing();
     mapFiltersForm.classList.add('hidden');
     mapPinMain.addEventListener('mousedown', formActivate);
     adForm.classList.add('ad-form--disabled');
-    window.map.getMapPinMainCoords();
+    window.map.getMapCoords();
   };
 
   var resetBtnHandler = function (evt) {
@@ -105,6 +112,7 @@
         priceInput.min = 10000;
         priceInput.placeholder = '10000';
         break;
+      default: priceInput.placeholder = '1000';
     }
   });
 
@@ -115,13 +123,6 @@
   timeOutInput.addEventListener('change', function (evt) {
     timeInInput.value = evt.target.value;
   });
-
-  var roomsValues = {
-    1: [1],
-    2: [1, 2],
-    3: [1, 2, 3],
-    100: [0]
-  };
 
   var disableСapacityOptions = function (inputValue) {
     var capacityOptions = capacitySelect.querySelectorAll('option');
@@ -205,6 +206,6 @@
   });
 
   window.form = {
-    activationForm: activationForm
+    activation: activationForm
   };
 }());

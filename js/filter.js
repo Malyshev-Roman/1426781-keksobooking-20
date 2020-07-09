@@ -4,15 +4,15 @@
 
   var mapFilters = document.querySelector('.map__filters-container');
   var mapFiltersForm = mapFilters.querySelector('.map__filters');
-  var renderPins = window.map.createFragment;
-  var removePins = window.pin.removePins;
+  var renderPins = window.map.createPins;
+  var removePins = window.pin.remove;
 
   var mapFiltersChangeHandler = function () {
     window.util.debounce(updatePins());
   };
 
   var updatePins = function () {
-    window.card.removeCard();
+    window.card.remove();
     removePins(window.mapPins);
     var housingType = document.querySelector('#housing-type').value;
     var housingPrice = document.querySelector('#housing-price').value;

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var url = {
+  var ENDPOINTS = {
     DOWNLOAD: 'https://javascript.pages.academy/keksobooking/data',
     UPLOAD: 'https://javascript.pages.academy/keksobooking'
   };
@@ -51,14 +51,14 @@
   var loadData = function (onLoad, onError) {
     var xhr = createXHR(onLoad, onError);
 
-    xhr.open('GET', url.DOWNLOAD);
+    xhr.open('GET', ENDPOINTS.DOWNLOAD);
     xhr.send();
   };
 
   var saveData = function (data, onLoad, onError) {
     var xhr = createXHR(onLoad, onError);
 
-    xhr.open('POST', url.UPLOAD);
+    xhr.open('POST', ENDPOINTS.UPLOAD);
     xhr.send(data);
   };
 
