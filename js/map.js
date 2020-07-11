@@ -66,7 +66,7 @@
     }
     mapPinMain.style.top = '375px';
     mapPinMain.style.left = '570px';
-    addressInput.value = (mapPinMain.offsetTop - mapPinMain.offsetHeight / 2) + ', ' + (mapPinMain.offsetLeft - mapPinMain.offsetWidth / 2);
+    fillAddress();
     mapAdvert.classList.add('map--faded');
   };
 

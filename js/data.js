@@ -2,8 +2,6 @@
 
 (function () {
 
-  // var advertArr = [];
-
   var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
@@ -29,13 +27,6 @@
   };
 
   window.data = {
-
-    // createAdvertArr: function (counts) {
-    //   for (var k = 0; k < counts; k++) {
-    //     advertArr[k] = window.pin.createAdverts(k);
-    //   }
-    //   return advertArr;
-    // },
 
     getPhotos: getPhotosArray,
     error: errorHandler

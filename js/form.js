@@ -61,8 +61,8 @@
       window.backend.load(successHandler, window.data.error);
     }
     window.map.address();
+    resetBtn.addEventListener('click', resetBtnHandler);
     mapPinMain.removeEventListener('mousedown', formActivate);
-    resetBtn.resetEventListener('click', resetBtnHandler);
   };
 
   mapPinMain.addEventListener('mousedown', formActivate);
@@ -82,6 +82,7 @@
     window.avatar.resetMap();
     window.avatar.resetHousing();
     mapFiltersForm.classList.add('hidden');
+    resetBtn.removeEventListener('click', resetBtnHandler);
     mapPinMain.addEventListener('mousedown', formActivate);
     adForm.classList.add('ad-form--disabled');
     window.map.getMapCoords();
@@ -90,9 +91,7 @@
   var resetBtnHandler = function (evt) {
     evt.preventDefault();
     deactivationForm();
-    window.loadImage.remove();
   };
-  resetBtn.addEventListener('click', resetBtnHandler);
 
   typeInput.addEventListener('change', function (evt) {
     switch (evt.target.value) {
