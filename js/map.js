@@ -53,11 +53,10 @@
   };
 
   var getMapPinMainCoords = function () {
-    var mapPinMainPosition = {
+    return {
       x: mapPinMain.offsetLeft + Math.floor(mapPinMain.offsetWidth / 2),
       y: mapPinMain.offsetTop + mapPinMain.offsetHeight + PIN_ARROW_WIDTH
     };
-    return mapPinMainPosition;
   };
 
   var mapDeactivate = function () {

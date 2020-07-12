@@ -1,16 +1,14 @@
 'use strict';
 
 (function () {
-  var ENDPOINTS = {
-    DOWNLOAD: 'https://javascript.pages.academy/keksobooking/data',
-    UPLOAD: 'https://javascript.pages.academy/keksobooking'
-  };
+  var ENDPOINTS_DOWNLOAD = 'https://javascript.pages.academy/keksobooking/data';
+  var ENDPOINTS_UPLOAD = 'https://javascript.pages.academy/keksobooking';
 
   var ServerCode = {
     SUCCESS: 200,
     BAD_REQUEST: 400,
     NOT_FOUND: 404,
-    ENTERNAL_ERROR: 500
+    INTERNAL_ERROR: 500
   };
 
   var createXHR = function (onLoad, onError) {
@@ -29,7 +27,7 @@
         case ServerCode.NOT_FOUND:
           onError('Произошла ошибка сервера: запрашиваемый ресурс не найден');
           break;
-        case ServerCode.ENTERNAL_ERROR:
+        case ServerCode.INTERNAL_ERROR:
           onError('Произошла внутренняя ошибка сервера');
           break;
         default:
@@ -51,14 +49,14 @@
   var loadData = function (onLoad, onError) {
     var xhr = createXHR(onLoad, onError);
 
-    xhr.open('GET', ENDPOINTS.DOWNLOAD);
+    xhr.open('GET', ENDPOINTS_DOWNLOAD);
     xhr.send();
   };
 
   var saveData = function (data, onLoad, onError) {
     var xhr = createXHR(onLoad, onError);
 
-    xhr.open('POST', ENDPOINTS.UPLOAD);
+    xhr.open('POST', ENDPOINTS_UPLOAD);
     xhr.send(data);
   };
 

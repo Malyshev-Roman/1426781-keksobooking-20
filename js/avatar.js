@@ -3,6 +3,9 @@
 (function () {
 
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var DEFAULT_AVATAR = 'img/muffin-grey.svg';
+  var AVATAR_WIDTH = 40;
+  var AVATAR_HEIGHT = 44;
   var fileMapChooser = document.querySelector('.ad-form-header__input');
   var mapPreview = document.querySelector('.ad-form-header__preview img');
   var fileHousingChooser = document.querySelector('.ad-form__input');
@@ -60,9 +63,9 @@
   };
 
   var resetMapPreview = function () {
-    mapPreview.setAttribute('src', 'img/muffin-grey.svg');
-    mapPreview.setAttribute('width', '40');
-    mapPreview.setAttribute('height', '44');
+    mapPreview.setAttribute('src', DEFAULT_AVATAR);
+    mapPreview.setAttribute('width', AVATAR_WIDTH);
+    mapPreview.setAttribute('height', AVATAR_HEIGHT);
     mapPreview.setAttribute('alt', 'Аватар пользователя');
   };
 

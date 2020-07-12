@@ -4,7 +4,7 @@
 
   var mapPinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
-  var adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
+  var adFormFieldSets = adForm.querySelectorAll('.ad-form__element');
   var mapFilters = document.querySelector('.map__filters-container');
   var mapFiltersForm = mapFilters.querySelector('.map__filters');
   var adFormHeader = adForm.querySelector('.ad-form-header');
@@ -31,16 +31,16 @@
 
   adFormHeader.disabled = true;
 
-  for (var l = 0; l < adFormFieldsets.length; l++) {
-    adFormFieldsets[l].disabled = true;
+  for (var l = 0; l < adFormFieldSets.length; l++) {
+    adFormFieldSets[l].disabled = true;
   }
 
   var activationForm = function () {
     var mapAdvert = document.querySelector('.map');
     mapAdvert.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    for (var i = 0; i < adFormFieldsets.length; i++) {
-      adFormFieldsets[i].disabled = false;
+    for (var i = 0; i < adFormFieldSets.length; i++) {
+      adFormFieldSets[i].disabled = false;
     }
     adFormHeader.disabled = false;
   };
@@ -70,7 +70,7 @@
   var deactivationForm = function () {
     var mapPinsItems = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     adForm.reset();
-    adFormFieldsets.forEach(function (el) {
+    adFormFieldSets.forEach(function (el) {
       el.disabled = true;
     });
     adFormHeader.disabled = true;
@@ -122,7 +122,7 @@
     timeInInput.value = evt.target.value;
   });
 
-  var disableСapacityOptions = function (inputValue) {
+  var disableCapacityOptions = function (inputValue) {
     var capacityOptions = capacitySelect.querySelectorAll('option');
     capacityOptions.forEach(function (el) {
       el.disabled = true;
@@ -132,16 +132,16 @@
     }
   };
 
-  var checkСapacity = function () {
-    disableСapacityOptions(roomNumberSelect.value);
+  var checkCapacity = function () {
+    disableCapacityOptions(roomNumberSelect.value);
   };
 
-  roomNumberSelect.addEventListener('change', checkСapacity);
+  roomNumberSelect.addEventListener('change', checkCapacity);
 
   var checkPlaceValidity = function () {
     var roomGuests = roomsValues[roomNumberSelect.value];
     if (roomGuests.indexOf(+capacitySelect.value) === -1) {
-      roomNumberSelect.addEventListener('change', checkСapacity);
+      roomNumberSelect.addEventListener('change', checkCapacity);
       capacitySelect.setCustomValidity('Количество гостей не влезут в выбранную комнату');
     } else {
       capacitySelect.setCustomValidity('');
