@@ -70,13 +70,13 @@
   var deactivationForm = function () {
     var mapPinsItems = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     adForm.reset();
-    for (var i = 0; i < adFormFieldsets.length; i++) {
-      adFormFieldsets[i].disabled = true;
-    }
+    adFormFieldsets.forEach(function (el) {
+      el.disabled = true;
+    });
     adFormHeader.disabled = true;
-    for (var j = 0; j < mapPinsItems.length; j++) {
-      mapPinsItems[j].remove();
-    }
+    mapPinsItems.forEach(function (el) {
+      el.remove();
+    });
     window.card.remove();
     window.map.deactivate();
     window.avatar.resetMap();
@@ -124,9 +124,9 @@
 
   var disableСapacityOptions = function (inputValue) {
     var capacityOptions = capacitySelect.querySelectorAll('option');
-    for (var t = 0; t < capacityOptions.length; t++) {
-      capacityOptions[t].disabled = true;
-    }
+    capacityOptions.forEach(function (el) {
+      el.disabled = true;
+    });
     for (var i = 0; i < roomsValues[inputValue].length; i++) {
       capacitySelect.querySelector('option' + '[value="' + roomsValues[inputValue][i] + '"]').disabled = false;
     }
